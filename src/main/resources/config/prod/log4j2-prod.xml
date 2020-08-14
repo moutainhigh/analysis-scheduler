@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info">
+    <Properties>
+        <Property name="log4j2.root.path">logs</Property>
+        <Property name="log4j.common.days">10</Property>
+    </Properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+        <RollingRandomAccessFile name="monitor" fileName="${log4j2.root.path}/system/monitor.log"
+                                 filePattern="${log4j2.root.path}/system/monitor.log.%d{yyyyMMdd}-%i.gz">
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="256 MB"/>
+            </Policies>
+            <PatternLayout>
+                <Pattern>[%p][%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}] %m%n</Pattern>
+            </PatternLayout>
+        </RollingRandomAccessFile>
+
+        <RollingRandomAccessFile name="httpRemote" fileName="${log4j2.root.path}/system/httpRemote.log"
+                                 filePattern="${log4j2.root.path}/system/httpRemote.log.%d{yyyyMMdd}-%i.gz">
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="256 MB"/>
+            </Policies>
+            <PatternLayout>
+                <Pattern>[%p][%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}] %m%n</Pattern>
+            </PatternLayout>
+        </RollingRandomAccessFile>
+
+        <RollingRandomAccessFile name="cache" fileName="${log4j2.root.path}/system/cache.log"
+                                 filePattern="${log4j2.root.path}/system/cache.log.%d{yyyyMMdd}-%i.gz">
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="256 MB"/>
+            </Policies>
+            <PatternLayout>
+                <Pattern>[%p][%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}] %m%n</Pattern>
+            </PatternLayout>
+        </RollingRandomAccessFile>
+
+        <RollingRandomAccessFile name="error" fileName="${log4j2.root.path}/biz/error.log"
+                                 filePattern="${log4j2.root.path}/biz/error.log.%d{yyyyMMdd}">
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <PatternLayout>
+                <Pattern>[%p][%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}] %m%n</Pattern>
+            </PatternLayout>
+        </RollingRandomAccessFile>
+
+        <RollingRandomAccessFile name="PV" fileName="${log4j2.root.path}/system/PV.log"
+                                 filePattern="${log4j2.root.path}/system/PV.log.%d{yyyyMMdd}-%i.gz">
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="256 MB"/>
+            </Policies>
+            <PatternLayout>
+                <Pattern>%m%n</Pattern>
+            </PatternLayout>
+        </RollingRandomAccessFile>
+
+    </Appenders>
+
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+        </Root>
+
+        <Logger name="monitor" level="info" additivity="false">
+            <AppenderRef ref="monitor"/>
+        </Logger>
+
+        <Logger name="httpRemote" level="info" additivity="false">
+            <AppenderRef ref="httpRemote"/>
+        </Logger>
+
+        <Logger name="cache" level="info" additivity="false">
+            <AppenderRef ref="cache"/>
+        </Logger>
+
+        <Logger name="error" level="info" additivity="false">
+            <AppenderRef ref="error"/>
+        </Logger>
+
+        <Logger name="PV" level="info" additivity="false">
+            <AppenderRef ref="PV"/>
+        </Logger>
+    </Loggers>
+</Configuration>
